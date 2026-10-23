@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JutsuGeek - Catálogo de Cartas Graduadas & Produtos</title>
+<style>
+  :root {
+    --bg: #0f0f14;
+    --card: #1a1a24;
+    --accent: #ffcb05;
+    --accent2: #3b4cca;
+    --text: #f0f0f0;
+    --muted: #aaa;
+    --green: #2ecc71;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 4px solid var(--accent);
+  }
+  header h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2.4rem;
+    color: var(--accent);
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem;
+  }
+  h2 {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent2);
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid #2a2a3a;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  .card h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.15rem;
+  }
+  .set {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  .price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--green);
+    margin: 0.5rem 0;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--accent2);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.4rem;
+  }
+  .badge.promo { background: #e74c3c; }
+  .btn {
+    display: inline-block;
+    margin-top: 0.8rem;
+    background: var(--accent);
+    color: #111;
+    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .btn:hover { opacity: 0.9; }
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid #222;
+    margin-top: 3rem;
+  }
+  .note {
+    background: #1e1e2a;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>JutsuGeek</h1>
+  <p>Catálogo de Cartas Graduadas & Produtos</p>
+  <p style="margin-top:0.6rem;font-size:0.95rem;">Loja oficial na MYP Cards • Pau dos Ferros - RN</p>
+</header>
+
+<div class="container">
+  <div class="note">
+    <strong>Catálogo atualizado com base nos anúncios da MYP.</strong><br>
+    Preços e disponibilidade podem mudar. Sempre confira o anúncio original antes de comprar.
+  </div>
+
+  <h2>Cartas Graduadas</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="badge promo">Promoção Graduada</span>
+      <h3>Rayquaza (138/185)</h3>
+      <div class="set">Voltagem Vívida (VIV) • Foil • NM</div>
+      <p>Slab com arranhão</p>
+      <div class="price">R$ 1.199,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon/produto/115032/rayquaza" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">Graduada</span>
+      <h3>Gengar ex (088/071)</h3>
+      <div class="set">Wild Force (SV5K) • Full-Art • Japonês • NM</div>
+      <div class="price">R$ 1.500,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon/produto/459461/gengar-ex" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">PSA 10</span>
+      <h3>Walking Wake Ex (094/071)</h3>
+      <div class="set">sv5K</div>
+      <div class="price">R$ 850,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">PSA 10</span>
+      <h3>Crispin (227/187)</h3>
+      <div class="set">SV8a • Terastal Fest ex</div>
+      <div class="price">R$ 690,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">PSA 10</span>
+      <h3>Drayton (229/187)</h3>
+      <div class="set">SV8a • Terastal Fest ex</div>
+      <div class="price">R$ 690,00</div>
+      <a class="btn" href="https://mypcards.com/outros/produto/318399/drayton-229187-psa-10-sv8a" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">PSA 10</span>
+      <h3>Kieran (218/167)</h3>
+      <div class="set">TWM</div>
+      <div class="price">R$ 590,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">PSA 10</span>
+      <h3>Munkidori (107/101)</h3>
+      <div class="set">sv6</div>
+      <div class="price">R$ 560,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">PSA 10</span>
+      <h3>Fezandipiti (108/101)</h3>
+      <div class="set">sv6 • Mask of Change • Japonês</div>
+      <div class="price">R$ 480,00</div>
+      <a class="btn" href="https://mypcards.com/outros/produto/319040/fezandipiti-108101-psa-10-sv6" target="_blank">Ver na MYP</a>
+    </div>
+  </div>
+
+  <h2>Produtos em Destaque</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>PLAYMAT Tera Tyranitar</h3>
+      <div class="set">Play Pokémon League Cup 2024 • Frete grátis</div>
+      <div class="price">R$ 999,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <h3>PLAYMAT Ethan's Ho-oh</h3>
+      <div class="set">Play Pokémon League Cup 2025 • Frete grátis</div>
+      <div class="price">R$ 599,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <h3>PLAYMAT Tera Dragapult</h3>
+      <div class="set">Play Pokémon League Cup 2025 • Frete grátis</div>
+      <div class="price">R$ 550,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <h3>PLAYMAT Tera Gyarados</h3>
+      <div class="set">Play Pokémon League Cup 2023 • Frete grátis</div>
+      <div class="price">R$ 399,00</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <h3>Booster Box / Combos PT-BR</h3>
+      <div class="set">Megaevolução, Celebração de 30 Anos, etc.</div>
+      <div class="price">A partir de R$ 195,90</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+
+    <div class="card">
+      <h3>Sleeves Unitários</h3>
+      <div class="set">Diversos temas (Eevee, Terapagos, Reshiram...)</div>
+      <div class="price">A partir de R$ 3,50</div>
+      <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:2.5rem;">
+    <strong>Quer atualizar o catálogo?</strong><br>
+    É só me pedir que eu gere uma nova versão com os anúncios mais recentes da sua loja na MYP.
+  </div>
+</div>
+
+<footer>
+  Catálogo gerado para JutsuGeek • Dados baseados nos anúncios públicos da MYP Cards<br>
+  <a href="https://mypcards.com/JutsuGeek" style="color:#ffcb05;" target="_blank">Ver loja completa na MYP</a>
+</footer>
+</body>
+</html>

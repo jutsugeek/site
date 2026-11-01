@@ -1,1 +1,682 @@
-<!-- Updating with full catalog content -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JutsuGeek • Cartas Graduadas & Produtos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fa;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --yellow: #f5c518;
+    --cyan: #00bcd4;
+    --orange: #ff6b00;
+    --accent: #00bcd4;
+    --accent-hover: #0097a7;
+    --border: #e5e7eb;
+    --price: #16a34a;
+    --promo: #ff6b00;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .top-bar {
+    background: #111111;
+    color: #f5c518;
+    font-size: 0.8rem;
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 3px solid #f5c518;
+  }
+  header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo img {
+    height: 48px;
+    width: auto;
+  }
+  nav a {
+    margin-left: 1.75rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  nav a:hover { color: var(--accent); }
+  .social-top {
+    background: #111111;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #f5c518;
+  }
+  .social-top a {
+    color: #f5c518;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .social-top a:hover { color: white; }
+  .social-top img {
+    height: 18px;
+    width: 18px;
+    filter: invert(1) brightness(0) saturate(100%) invert(78%) sepia(65%) saturate(500%) hue-rotate(5deg);
+  }
+  .banner img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-height: 220px;
+    object-fit: cover;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .product {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .product:hover {
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .product-img {
+    aspect-ratio: 1;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .product-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .product-body {
+    padding: 1rem 1.1rem 1.25rem;
+  }
+  .product h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+  .price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--price);
+    margin-bottom: 0.75rem;
+  }
+  .btn {
+    display: block;
+    text-align: center;
+    background: var(--cyan);
+    color: white;
+    text-decoration: none;
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .badge {
+    display: inline-block;
+    background: #fff3e0;
+    color: var(--orange);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    margin-bottom: 0.4rem;
+  }
+  footer {
+    background: #111111;
+    color: #9ca3af;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-size: 0.85rem;
+    border-top: 3px solid #f5c518;
+  }
+  .social {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .social a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #f5c518;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .social a:hover { color: white; }
+  .social img {
+    height: 20px;
+    width: 20px;
+    filter: invert(1) brightness(0) saturate(100%) invert(78%) sepia(65%) saturate(500%) hue-rotate(5deg);
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  Frete grátis acima de R$ 299 em cartas avulsas • Envio rápido • Pau dos Ferros - RN
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><img src="logo.png" alt="JutsuGeek"></div>
+    <nav>
+      <a href="#graduadas">Cartas Graduadas</a>
+      <a href="#produtos">Produtos</a>
+      <a href="https://mypcards.com/JutsuGeek" target="_blank">Loja Completa</a>
+    </nav>
+  </div>
+</header>
+
+<div class="banner">
+  <img src="banner.png" alt="JutsuGeek Banner">
+</div>
+
+<div class="social-top">
+  <a href="https://www.instagram.com/jutsu_geek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="IG"> Instagram</a>
+  <a href="https://www.facebook.com/JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" alt="FB"> Facebook</a>
+  <a href="https://www.youtube.com/@JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" alt="YT"> YouTube</a>
+  <a href="https://x.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" alt="X"> X</a>
+  <a href="http://wa.me/5584988229883" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WA"> WhatsApp</a>
+  <a href="https://www.pinterest.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/pinterest.svg" alt="Pin"> Pinterest</a>
+</div>
+
+<div class="container">
+  <section class="section" id="graduadas">
+    <h2>Cartas Graduadas</h2>
+    <div class="grid">
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12115383/543a18aabb670cf1.png" alt="Rayquaza">
+        </div>
+        <div class="product-body">
+          <span class="badge">Promoção</span>
+          <h3>Rayquaza (138/185)</h3>
+          <div class="meta">VIV • Foil • NM • Slab</div>
+          <div class="price">R$ 1.199,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon/produto/115032/rayquaza" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12052991/79c0c2ddac3ab547.png" alt="Gengar ex">
+        </div>
+        <div class="product-body">
+          <h3>Gengar ex (088/071)</h3>
+          <div class="meta">SV5K • Full-Art • Japonês</div>
+          <div class="price">R$ 1.500,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon/produto/459461/gengar-ex" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <!-- Mais cartas graduadas -->
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032150/0e791deafb192b81.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032140/e6dfdbf31a294f0a.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032144/8e9ed04ac6742203.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032138/76dfbca80b7bc13e.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12053470/bd83a751d350373d.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12034399/34cb0fc4ebc1e38d.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032148/e910ee6a2c4c8c8a.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032153/a6bdd5cb60ea8733.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032143/7725a9b48fa9b774.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/w=1500,fit=scale-down,f=auto/img/estoque/52811/fotos/12032149/957a7572f75f15a0.png" alt="Graduada">
+        </div>
+        <div class="product-body">
+          <h3>Carta Graduada</h3>
+          <div class="meta">PSA / Graduada</div>
+          <div class="price">Ver preço</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/pokemon" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="produtos">
+    <h2>Produtos</h2>
+    <div class="grid">
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/414821/48d055ea0ef42347b22bae8fbfed61c9.png" alt="Sleeve">
+        </div>
+        <div class="product-body">
+          <h3>Sleeve Básico Transparente</h3>
+          <div class="meta">Central Shield</div>
+          <div class="price">R$ 12,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/414884/a40df5c86c5656bad92813d34a20e3f6.png" alt="Top Loader">
+        </div>
+        <div class="product-body">
+          <span class="badge">Promoção</span>
+          <h3>TopLoader Rígido</h3>
+          <div class="meta">Central Acessórios • 1 un.</div>
+          <div class="price">R$ 2,59</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/414816/513a91c52bcf1a31bf8a45c140fd3a28.png" alt="Pasta Azul">
+        </div>
+        <div class="product-body">
+          <h3>Pasta Álbum 3×3 Azul</h3>
+          <div class="meta">Central Acessórios</div>
+          <div class="price">R$ 115,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/414818/5dd27807043b0f63db74ddceee299650.png" alt="Pasta Rosé">
+        </div>
+        <div class="product-body">
+          <h3>Pasta Álbum 3×3 Rosé</h3>
+          <div class="meta">Central Acessórios</div>
+          <div class="price">R$ 115,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/414817/eb5fdb3ac7d93f6736777b5b5937672d.png" alt="Pasta Roxo">
+        </div>
+        <div class="product-body">
+          <h3>Pasta Álbum 3×3 Roxo</h3>
+          <div class="meta">Central Acessórios</div>
+          <div class="price">R$ 115,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/414819/b7c6fc6900dacf144f41ec1364938471.png" alt="Pasta Vermelho">
+        </div>
+        <div class="product-body">
+          <h3>Pasta Álbum 3×3 Vermelho</h3>
+          <div class="meta">Central Acessórios</div>
+          <div class="price">R$ 115,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/474405/add6ec086baa369c800744c859aad8f4.jpg" alt="Combo 30 Anos">
+        </div>
+        <div class="product-body">
+          <h3>Combo de Pacotes - 30 Anos</h3>
+          <div class="meta">PT-BR • Caixa de Booster</div>
+          <div class="price">R$ 399,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/325468/e29380e782ede20fe659f8f5b71c3bc1.png" alt="Booster Box">
+        </div>
+        <div class="product-body">
+          <h3>Booster Box ME04</h3>
+          <div class="meta">Caos Ascendente</div>
+          <div class="price">R$ 395,90</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/361609/d46225e8429e4766106d7d55882cb85d.jpg" alt="Caixa Booster">
+        </div>
+        <div class="product-body">
+          <h3>Caixa de Booster - Megaevolução 5</h3>
+          <div class="meta">Escuridão Absoluta • PT-BR</div>
+          <div class="price">R$ 330,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/360576/bd9788fd860e7a88d9ec55996978de92.png" alt="Combo Pacotes">
+        </div>
+        <div class="product-body">
+          <h3>Combo de Pacotes - Megaevolução 5</h3>
+          <div class="meta">Escuridão Absoluta • PT-BR</div>
+          <div class="price">R$ 195,90</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/303027/7ed5106d874075ef50578ab5504d1b5f.png" alt="Fezandipiti">
+        </div>
+        <div class="product-body">
+          <span class="badge">Promoção</span>
+          <h3>Ferramentas de treinador - Fezandipiti EX</h3>
+          <div class="meta">Selado</div>
+          <div class="price">R$ 188,90</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <!-- Playmats -->
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310634/21d91ae410e1d9e2daee771216e79a6a.png" alt="Playmat Tera Pikachu">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Tera Pikachu</h3>
+          <div class="meta">League Cup 2025</div>
+          <div class="price">R$ 1.200,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310634/playmat-tera-pikachu-play-pokemon-league-cup-2025" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310626/af13cec345cca9cb15e8cb6235cc0a8a.png" alt="Playmat Tera Tyranitar">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Tera Tyranitar</h3>
+          <div class="meta">League Cup 2024</div>
+          <div class="price">R$ 999,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310626/playmat-tera-tyranitar-play-pokemon-league-cup-2024" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310636/195293112416b4ff07c1a923fbcff65f.png" alt="Playmat Ethan's Ho-oh">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Ethan's Ho-oh</h3>
+          <div class="meta">League Cup 2025</div>
+          <div class="price">R$ 599,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310636/playmat-ethans-ho-oh-play-pokemon-league-cup-2025" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310624/72bbfd943f5133b7a04191bdf441939d.png" alt="Playmat Tera Dragapult">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Tera Dragapult</h3>
+          <div class="meta">League Cup 2025</div>
+          <div class="price">R$ 550,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310624/playmat-tera-dragapult-play-pokemon-league-cup-2025" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310625/f0a250712bcb26d8b1407bfaeae5f0b1.png" alt="Playmat Raio Furia">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Raio Furia</h3>
+          <div class="meta">League Cup 2024</div>
+          <div class="price">R$ 450,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310625/playmat-raio-furia-play-pokemon-league-cup-2024" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310628/f29fa17a2ba4e3fbdc50b52e04e6fb53.png" alt="Playmat Tera Gyarados">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Tera Gyarados</h3>
+          <div class="meta">League Cup 2023</div>
+          <div class="price">R$ 399,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310628/playmat-tera-gyarados-play-pokemon-league-cup-2023" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310631/2fe03868a87ecab77885025e939e5661.png" alt="Playmat Tera Lapras">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Tera Lapras</h3>
+          <div class="meta">League Cup 2024</div>
+          <div class="price">R$ 399,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310631/playmat-tera-lapras-play-pokemon-league-cup-2024" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/310627/9850938ddedd4f710d975f7859dbc51d.png" alt="Playmat Meowscarada">
+        </div>
+        <div class="product-body">
+          <h3>PLAYMAT Meowscarada</h3>
+          <div class="meta">League Cup 2023</div>
+          <div class="price">R$ 380,00</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/310627/playmat-meowscarada-play-pokemon-league-cup-2023" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/281875/7f5a5b89bcde4f5318b3c8bb6508844d.png" alt="Top Loader Magnético">
+        </div>
+        <div class="product-body">
+          <h3>Top Loader Magnético</h3>
+          <div class="meta">Central Acessórios • 1 un.</div>
+          <div class="price">R$ 24,70</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/281875/central-top-loader-magnetico-transparente-1-unidade" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/52811/457023/d20647b5555f014feb9e042077713224.png" alt="Slab Sleeves">
+        </div>
+        <div class="product-body">
+          <h3>Slab Sleeves</h3>
+          <div class="meta">Central Acessórios • 1 un.</div>
+          <div class="price">R$ 1,20</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/457023/1-unidade-slab-sleeves-central-acessorios" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-img">
+          <img src="https://img.mypcards.com/cdn-cgi/image/h=425,fit=contain,f=auto/img/0/mp/360502/a1976b102daf77d8062dc86bd8b955a3.jpg" alt="Blister Binacle">
+        </div>
+        <div class="product-body">
+          <h3>Blister Quádruplo - Binacle</h3>
+          <div class="meta">Megaevolução 5 • PT-BR</div>
+          <div class="price">R$ 43,99</div>
+          <a class="btn" href="https://mypcards.com/JutsuGeek/outros/produto/360502/pt-br-blister-quadruplo-megaevolucao-5-escuridao-absoluta-binacle" target="_blank">Ver na MYP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  JutsuGeek • Pau dos Ferros - RN<br>
+  <a href="https://mypcards.com/JutsuGeek" target="_blank">Ver loja completa na MYP Cards</a>
+  <div class="social">
+    <a href="https://www.instagram.com/jutsu_geek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="IG"> Instagram</a>
+    <a href="https://www.facebook.com/JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" alt="FB"> Facebook</a>
+    <a href="https://www.youtube.com/@JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" alt="YT"> YouTube</a>
+    <a href="https://x.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" alt="X"> X</a>
+    <a href="http://wa.me/5584988229883" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WA"> WhatsApp</a>
+    <a href="https://www.pinterest.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/pinterest.svg" alt="Pin"> Pinterest</a>
+  </div>
+</footer>
+</body>
+</html>

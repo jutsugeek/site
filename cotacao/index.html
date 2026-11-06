@@ -79,8 +79,8 @@
                 <div class="sm:col-span-3">
                     <label class="block text-xs font-medium text-gray-300 mb-1">Cód. / Pokémon</label>
                     <div class="relative flex items-center">
-                        <input type="text" id="card-code" placeholder="Ex: 002/080" class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-3 pr-24 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
-                        <!-- Botão Flutuante de Busca Geral -->
+                        <input type="text" id="card-code" placeholder="Ex: 001/165" class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-3 pr-24 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                        <!-- Botão Flutuante de Busca por Código -->
                         <div id="search-btn-container" class="absolute right-1.5 hidden">
                             <button type="button" id="search-liga-btn" class="bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-semibold py-1 px-2 rounded shadow transition flex items-center gap-1 cursor-pointer">
                                 🔍 Procure aqui
@@ -189,11 +189,11 @@
             }
         });
 
-        // Ação do botão: força a abertura da página de resultados de pesquisa geral da Liga
+        // Ação do botão: redireciona para a listagem exata por código na Liga Pokémon
         searchLigaBtn.addEventListener('click', () => {
             const code = cardCodeInput.value.trim();
             if (code) {
-                const url = `https://www.ligapokemon.com.br/?view=search%2Fcard&q=${encodeURIComponent(code)}`;
+                const url = `https://www.ligapokemon.com.br/?view=cards/card&card=${encodeURIComponent(code)}`;
                 window.open(url, '_blank');
             }
         });

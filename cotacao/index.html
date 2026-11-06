@@ -237,4 +237,59 @@
             cartList.innerHTML = '';
 
             if (cards.length === 0) {
-                cartList
+                cartList.innerHTML = `
+                    <tr id="empty-row">
+                        <td colspan="6" class="py-6 text-center text-gray-500 text-xs">Nenhuma carta adicionada à lista ainda.</td>
+                    </tr>
+                `;
+                totalAmountEl.textContent = 'R$ 0,00';
+                cardCountEl.textContent = '0 cartas';
+                sendWhatsappBtn.disabled = true;
+                return;
+            }
+
+            let total = 0;
+            cards.forEach((card, index) => {
+                total += card.offerPrice;
+
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-900/50 transition';
+                row.innerHTML = `
+                    <td class="py-3 px-2 font-mono text-xs text-purple-400">${card.code}</td>
+                    <td class="py-3 px-2 font-medium text-white">${card.name}</td>
+                    <td class="py-3 px-2 text-gray-300 font-semibold">${card.condition}</td>
+                    <td class="py-3 px-2 text-gray-400">R$ ${card.marketPrice.toFixed(2)}</td>
+                    <td class="py-3 px-2 text-green-400 font-bold">R$ ${card.offerPrice.toFixed(2)}</td>
+                    <td class="py-3 px-2 text-right">
+                        <button onclick="removeCard(${index})" class="text-red-400 hover:text-red-300 text-xs font-medium cursor-pointer">Remover</button>
+                    </td>
+                `;
+                cartList.appendChild(row);
+            });
+
+            totalAmountEl.textContent = `R$ ${total.toFixed(2)}`;
+            cardCountEl.textContent = `${cards.length} ${cards.length === 1 ? 'carta' : 'cartas'}`;
+            sendWhatsappBtn.disabled = false;
+        }
+
+        sendWhatsappBtn.addEventListener('click', () => {
+            if (cards.length === 0) return;
+
+            let message = "Olá! Gostaria de cotar as seguintes cartas na Jutsu Geek:\n\n";
+            let total = 0;
+
+            cards.forEach((card, i) => {
+                const codeStr = card.code !== '-' ? `[Cód: ${card.code}] ` : '';
+                message += `${i + 1}. ${codeStr}*${card.name}* (${card.condition}) - Liga: R$ ${card.marketPrice.toFixed(2)} | Oferta: *R$ ${card.offerPrice.toFixed(2)}*\n`;
+                total += card.offerPrice;
+            });
+
+            message += `\n*Total Estimado da Proposta:* R$ ${total.toFixed(2)}`;
+
+            const phone = "5500000000000"; 
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+        });
+    </script>
+</body>
+</html>

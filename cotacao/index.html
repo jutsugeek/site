@@ -36,7 +36,7 @@
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 text-sm">
                 <a href="https://www.ligapokemon.com.br" target="_blank" class="bg-gray-950 p-3 rounded-lg border border-gray-800 hover:border-purple-500 transition text-center font-medium text-purple-400">
-                    🧢 Liga Pokémon
+                    🧢 Pokémon TCG
                 </a>
                 <a href="https://www.ligayugioh.com.br" target="_blank" class="bg-gray-950 p-3 rounded-lg border border-gray-800 hover:border-purple-500 transition text-center font-medium text-purple-400">
                     🃏 Yu-Gi-Oh! TCG
@@ -79,8 +79,8 @@
                 <div class="sm:col-span-3">
                     <label class="block text-xs font-medium text-gray-300 mb-1">Cód. / Pokémon</label>
                     <div class="relative flex items-center">
-                        <input type="text" id="card-code" placeholder="Ex: 001/151" class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-3 pr-24 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
-                        <!-- Botão Flutuante de Busca Geral -->
+                        <input type="text" id="card-code" placeholder="Ex: 002/080" class="w-full bg-gray-950 border border-gray-800 rounded-lg pl-3 pr-24 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                        <!-- Botão Flutuante de Busca Exata por Código -->
                         <div id="search-btn-container" class="absolute right-1.5 hidden">
                             <button type="button" id="search-liga-btn" class="bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-semibold py-1 px-2 rounded shadow transition flex items-center gap-1 cursor-pointer">
                                 🔍 Procure aqui
@@ -189,11 +189,11 @@
             }
         });
 
-        // Ação do botão: redireciona para a página geral de busca da Liga Pokémon pelo código
+        // Ação do botão: redireciona para a página exata de busca por código da Liga Pokémon
         searchLigaBtn.addEventListener('click', () => {
             const code = cardCodeInput.value.trim();
             if (code) {
-                const url = `https://www.ligapokemon.com.br/?view=search%2Fcard&q=${encodeURIComponent(code)}`;
+                const url = `https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=${encodeURIComponent(code)}`;
                 window.open(url, '_blank');
             }
         });
@@ -285,7 +285,7 @@
 
             message += `\n*Total Estimado da Proposta:* R$ ${total.toFixed(2)}`;
 
-            const phone = "5584988229883"; 
+            const phone = "5500000000000"; 
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
         });

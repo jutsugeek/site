@@ -111,13 +111,26 @@ async function loadAbout() {
   try {
     const res = await fetch(DOCS_URL);
     const html = await res.text();
-    // Extrai só o conteúdo principal do Docs
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
-    const body = doc.body.innerHTML;
-    document.getElementById('about-content').innerHTML = body || '<p>Conteúdo não encontrado.</p>';
+
+    // Remove elementos do Google Docs
+    doc.querySelectorAll('style, script, .google-docs-header, #header, .docs-ml-header, .docs-ml-footer').forEach(el => el.remove());
+
+    // Pega só o conteúdo principal
+    let content = doc.body.innerHTML;
+
+    // Remove textos padrão do Google
+    content = content
+      .replace(/Publicada usando o Google Docs/gi, '')
+      .replace(/Denunciar abuso/gi, '')
+      .replace(/Saiba mais/gi, '')
+      .replace(/Atualizado automaticamente a cada 5 minutos/gi, '')
+      .replace(/<div[^>]*>\s*<\/div>/gi, '');
+
+    document.getElementById('about-content').innerHTML = content.trim() || '<p>Conteúdo não encontrado.</p>';
   } catch (e) {
-    document.getElementById('about-content').innerHTML = '<p>Erro ao carregar o conteúdo. Verifique o link do Google Docs.</p>';
+    document.getElementById('about-content').innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
   }
 }
 

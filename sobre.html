@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre Nós | JutsuGeek</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #030712;
+    --surface: #111827;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --yellow: #facc15;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .top-bar {
+    background: #111827;
+    color: #facc15;
+    font-size: 0.8rem;
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(250, 204, 21, 0.4);
+  }
+  header {
+    background: #111827;
+    border-bottom: 1px solid rgba(250, 204, 21, 0.25);
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo img { height: 48px; width: auto; filter: drop-shadow(0 0 8px rgba(250,204,21,0.4)); }
+  nav a {
+    margin-left: 1.75rem;
+    color: #d1d5db;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  nav a:hover, nav a.active { color: #facc15; }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+  .content {
+    background: #111827;
+    border: 1px solid rgba(250,204,21,0.25);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .content h1 { font-size: 1.8rem; margin-bottom: 1rem; color: white; }
+  .content p { margin-bottom: 1rem; color: #d1d5db; }
+  .content h2 { font-size: 1.3rem; margin: 1.5rem 0 0.5rem; color: #facc15; }
+  footer {
+    background: #111827;
+    color: #9ca3af;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.85rem;
+    border-top: 2px solid rgba(250, 204, 21, 0.4);
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  Frete grátis acima de R$ 299 em cartas avulsas • Envio rápido • Pau dos Ferros - RN
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><a href="/"><img src="/logo.png" alt="JutsuGeek"></a></div>
+    <nav>
+      <a href="/sobre.html" class="active">Sobre Nós</a>
+      <a href="/#graduadas">Cartas Graduadas</a>
+      <a href="/#produtos">Produtos</a>
+      <a href="https://mypcards.com/JutsuGeek" target="_blank">Loja Completa</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="content" id="about-content">
+    <p>Carregando...</p>
+  </div>
+</div>
+
+<footer>
+  JutsuGeek • Pau dos Ferros - RN
+</footer>
+
+<script>
+// Substitua pelo link de publicação do seu Google Docs (formato HTML)
+const DOCS_URL = 'https://docs.google.com/document/d/e/2PACX-1vTNu25nwUYOWudj6u7fxgv0ga9HX34x8J9Ddle_fxiuYJXlxProyvz5xXhIyrffIJsvr_8fBHGvNxia/pub';
+
+async function loadAbout() {
+  try {
+    const res = await fetch(DOCS_URL);
+    const html = await res.text();
+    // Extrai só o conteúdo principal do Docs
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const body = doc.body.innerHTML;
+    document.getElementById('about-content').innerHTML = body || '<p>Conteúdo não encontrado.</p>';
+  } catch (e) {
+    document.getElementById('about-content').innerHTML = '<p>Erro ao carregar o conteúdo. Verifique o link do Google Docs.</p>';
+  }
+}
+
+loadAbout();
+</script>
+</body>
+</html>

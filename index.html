@@ -260,27 +260,73 @@
 
 <script>
 // Substitua esta URL pela URL de publicação da sua planilha Google Sheets (CSV)
+// URL da planilha (formato JSON da Google Visualization API - mais estável)
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8b-QvuBfx53su8LQsbAnocJW4CDnViiheY89jwf4TsPwnzPfUgpiRzn6UG-FCV1SrlMfVByRT8wm3/pub?gid=834701060&single=true&output=csv';
 
 async function loadProducts() {
   try {
     const res = await fetch(SHEET_CSV_URL);
     const text = await res.text();
-    const rows = text.trim().split('\n').slice(1); // remove header
-    const products = rows.map(row => {
-      const [name, category, price, meta, image, link, badge] = row.split(',').map(s => s.trim().replace(/^"|"$/g, ''));
-      return { name, category, price, meta, image, link, badge };
-    }).filter(p => p.name);
+
+    // Parser robusto para CSV com vírgulas dentro de campos
+    function parseCSV(csv) {
+      const result = [];
+      let row = [];
+      let field = '';
+      let inQuotes = false;
+      for (let i = 0; i < csv.length; i++) {
+        const char = csv[i];
+        const next = csv[i + 1];
+        if (char === '"' && inQuotes && next === '"') {
+          field += '"';
+          i++;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          row.push(field.trim());
+          field = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') i++;
+          row.push(field.trim());
+          if (row.some(c => c)) result.push(row);
+          row = [];
+          field = '';
+        } else {
+          field += char;
+        }
+      }
+      if (field || row.length) {
+        row.push(field.trim());
+        if (row.some(c => c)) result.push(row);
+      }
+      return result;
+    }
+
+    const rows = parseCSV(text).slice(1);
+    const products = rows.map(cols => ({
+      name: cols[0] || '',
+      category: cols[1] || '',
+      price: cols[2] || '',
+      meta: cols[3] || '',
+      image: cols[4] || '',
+      link: cols[5] || '',
+      badge: cols[6] || ''
+    })).filter(p => p.name);
 
     const gridGrad = document.getElementById('grid-graduadas');
     const gridProd = document.getElementById('grid-produtos');
+
+    if (products.length === 0) {
+      gridGrad.innerHTML = '<p>Nenhum produto encontrado na planilha.</p>';
+      return;
+    }
 
     products.forEach(p => {
       const card = document.createElement('div');
       card.className = 'product';
       card.innerHTML = `
         <div class="product-img">
-          <img src="${p.image}" alt="${p.name}">
+          <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
         </div>
         <div class="product-body">
           ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
@@ -290,12 +336,12 @@ async function loadProducts() {
           <a class="btn" href="${p.link}" target="_blank">Ver na MYP</a>
         </div>
       `;
-      if (p.category === 'graduadas') gridGrad.appendChild(card);
+      if (p.category.toLowerCase() === 'graduadas') gridGrad.appendChild(card);
       else gridProd.appendChild(card);
     });
   } catch (e) {
-    console.error('Erro ao carregar planilha:', e);
-    document.getElementById('grid-graduadas').innerHTML = '<p>Erro ao carregar produtos. Verifique a planilha.</p>';
+    console.error(e);
+    document.getElementById('grid-graduadas').innerHTML = '<p>Erro ao carregar a planilha. Tente novamente em alguns minutos.</p>';
   }
 }
 

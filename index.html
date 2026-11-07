@@ -226,6 +226,7 @@
   <div class="header-inner">
     <div class="logo"><img src="logo.png" alt="JutsuGeek"></div>
     <nav>
+      <a href="/sobre.html">Sobre Nós</a>
       <a href="#graduadas">Cartas Graduadas</a>
       <a href="#produtos">Produtos</a>
       <a href="https://mypcards.com/JutsuGeek" target="_blank">Loja Completa</a>
@@ -268,27 +269,22 @@ async function loadProducts() {
     const res = await fetch(SHEET_CSV_URL);
     const text = await res.text();
 
-    // Parser robusto para CSV com vírgulas dentro de campos
+    // Parser que trata corretamente campos com vírgulas (quando estão entre aspas)
     function parseCSV(csv) {
-      const result = [];
+      const rows = [];
       let row = [];
       let field = '';
       let inQuotes = false;
       for (let i = 0; i < csv.length; i++) {
         const char = csv[i];
-        const next = csv[i + 1];
-        if (char === '"' && inQuotes && next === '"') {
-          field += '"';
-          i++;
-        } else if (char === '"') {
+        if (char === '"') {
           inQuotes = !inQuotes;
         } else if (char === ',' && !inQuotes) {
-          row.push(field.trim());
+          row.push(field);
           field = '';
-        } else if ((char === '\n' || char === '\r') && !inQuotes) {
-          if (char === '\r' && next === '\n') i++;
-          row.push(field.trim());
-          if (row.some(c => c)) result.push(row);
+        } else if (char === '\n' && !inQuotes) {
+          row.push(field);
+          if (row.some(c => c.trim())) rows.push(row);
           row = [];
           field = '';
         } else {
@@ -296,14 +292,14 @@ async function loadProducts() {
         }
       }
       if (field || row.length) {
-        row.push(field.trim());
-        if (row.some(c => c)) result.push(row);
+        row.push(field);
+        if (row.some(c => c.trim())) rows.push(row);
       }
-      return result;
+      return rows.map(r => r.map(c => c.trim().replace(/^"|"$/g, '')));
     }
 
-    const rows = parseCSV(text).slice(1);
-    const products = rows.map(cols => ({
+    const allRows = parseCSV(text);
+    const products = allRows.slice(1).map(cols => ({
       name: cols[0] || '',
       category: cols[1] || '',
       price: cols[2] || '',
@@ -311,22 +307,20 @@ async function loadProducts() {
       image: cols[4] || '',
       link: cols[5] || '',
       badge: cols[6] || ''
-    })).filter(p => p.name);
+    })).filter(p => p.name && p.image);
 
     const gridGrad = document.getElementById('grid-graduadas');
     const gridProd = document.getElementById('grid-produtos');
 
-    if (products.length === 0) {
-      gridGrad.innerHTML = '<p>Nenhum produto encontrado na planilha.</p>';
-      return;
-    }
+    gridGrad.innerHTML = '';
+    gridProd.innerHTML = '';
 
     products.forEach(p => {
       const card = document.createElement('div');
       card.className = 'product';
       card.innerHTML = `
         <div class="product-img">
-          <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+          <img src="${p.image}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div style=\\'padding:2rem;color:#666\\'>Sem imagem</div>'">
         </div>
         <div class="product-body">
           ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
@@ -336,12 +330,12 @@ async function loadProducts() {
           <a class="btn" href="${p.link}" target="_blank">Ver na MYP</a>
         </div>
       `;
-      if (p.category.toLowerCase() === 'graduadas') gridGrad.appendChild(card);
+      if (p.category.toLowerCase().includes('gradu')) gridGrad.appendChild(card);
       else gridProd.appendChild(card);
     });
   } catch (e) {
     console.error(e);
-    document.getElementById('grid-graduadas').innerHTML = '<p>Erro ao carregar a planilha. Tente novamente em alguns minutos.</p>';
+    document.getElementById('grid-graduadas').innerHTML = '<p>Erro ao carregar a planilha.</p>';
   }
 }
 

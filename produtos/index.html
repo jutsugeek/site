@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JutsuGeek • Cartas Graduadas & Produtos</title>
+<title>Produtos | JutsuGeek</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -12,11 +12,6 @@
     --text: #f3f4f6;
     --muted: #9ca3af;
     --yellow: #facc15;
-    --cyan: #00bcd4;
-    --orange: #f97316;
-    --accent: #facc15;
-    --accent-hover: #eab308;
-    --border: #1f2937;
     --price: #4ade80;
     --promo: #f97316;
   }
@@ -62,7 +57,7 @@
     font-weight: 500;
     font-size: 0.95rem;
   }
-  nav a:hover { color: #facc15; }
+  nav a:hover, nav a.active { color: #facc15; }
   .social-top {
     background: #111827;
     padding: 0.75rem 1.5rem;
@@ -99,9 +94,6 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
-  }
-  .section {
-    margin-bottom: 3rem;
   }
   .section h2 {
     font-size: 1.5rem;
@@ -141,26 +133,10 @@
     max-height: 100%;
     object-fit: contain;
   }
-  .product-body {
-    padding: 1rem 1.1rem 1.25rem;
-  }
-  .product h3 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: white;
-  }
-  .meta {
-    color: var(--muted);
-    font-size: 0.8rem;
-    margin-bottom: 0.6rem;
-  }
-  .price {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #4ade80;
-    margin-bottom: 0.75rem;
-  }
+  .product-body { padding: 1rem 1.1rem 1.25rem; }
+  .product h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; color: white; }
+  .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 0.6rem; }
+  .price { font-size: 1.25rem; font-weight: 700; color: #4ade80; margin-bottom: 0.75rem; }
   .btn {
     display: block;
     text-align: center;
@@ -171,7 +147,6 @@
     border-radius: 10px;
     font-size: 0.85rem;
     font-weight: 700;
-    transition: background 0.15s;
   }
   .btn:hover { background: #eab308; }
   .badge {
@@ -193,28 +168,6 @@
     font-size: 0.85rem;
     border-top: 2px solid rgba(250, 204, 21, 0.4);
   }
-  .social {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-  }
-  .social a {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #facc15;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-  .social a:hover { color: white; }
-  .social img {
-    height: 20px;
-    width: 20px;
-    filter: invert(1) brightness(0) saturate(100%) invert(78%) sepia(65%) saturate(500%) hue-rotate(5deg);
-  }
 </style>
 </head>
 <body>
@@ -224,19 +177,19 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo"><img src="logo.png" alt="JutsuGeek"></div>
+    <div class="logo"><a href="/"><img src="/logo.png" alt="JutsuGeek"></a></div>
     <nav>
       <a href="/">Início</a>
       <a href="/sobre.html">Sobre Nós</a>
       <a href="/graduadas/">Cartas Graduadas</a>
-      <a href="/produtos/">Produtos</a>
+      <a href="/produtos/" class="active">Produtos</a>
       <a href="https://mypcards.com/JutsuGeek" target="_blank">Loja Completa</a>
     </nav>
   </div>
 </header>
 
 <div class="banner">
-  <img src="banner.png" alt="JutsuGeek Banner">
+  <img src="/banner.png" alt="JutsuGeek Banner">
 </div>
 
 <div class="social-top">
@@ -249,20 +202,13 @@
 </div>
 
 <div class="container">
-  <section class="section" id="graduadas">
-    <h2>Cartas Graduadas</h2>
-    <div class="grid" id="grid-graduadas"></div>
-  </section>
-
-  <section class="section" id="produtos">
+  <section class="section">
     <h2>Produtos</h2>
-    <div class="grid" id="grid-produtos"></div>
+    <div class="grid" id="grid"></div>
   </section>
 </div>
 
 <script>
-// Substitua esta URL pela URL de publicação da sua planilha Google Sheets (CSV)
-// URL da planilha (formato JSON da Google Visualization API - mais estável)
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8b-QvuBfx53su8LQsbAnocJW4CDnViiheY89jwf4TsPwnzPfUgpiRzn6UG-FCV1SrlMfVByRT8wm3/pub?gid=834701060&single=true&output=csv';
 
 async function loadProducts() {
@@ -270,7 +216,6 @@ async function loadProducts() {
     const res = await fetch(SHEET_CSV_URL);
     const text = await res.text();
 
-    // Parser que trata corretamente campos com vírgulas (quando estão entre aspas)
     function parseCSV(csv) {
       const rows = [];
       let row = [];
@@ -308,13 +253,15 @@ async function loadProducts() {
       image: cols[4] || '',
       link: cols[5] || '',
       badge: cols[6] || ''
-    })).filter(p => p.name && p.image);
+    })).filter(p => p.name && p.image && !p.category.toLowerCase().includes('gradu'));
 
-    const gridGrad = document.getElementById('grid-graduadas');
-    const gridProd = document.getElementById('grid-produtos');
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
 
-    gridGrad.innerHTML = '';
-    gridProd.innerHTML = '';
+    if (products.length === 0) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#9ca3af;">Nenhum produto cadastrado.</p>';
+      return;
+    }
 
     products.forEach(p => {
       const card = document.createElement('div');
@@ -331,12 +278,11 @@ async function loadProducts() {
           <a class="btn" href="${p.link}" target="_blank">Ver na MYP</a>
         </div>
       `;
-      if (p.category.toLowerCase().includes('gradu')) gridGrad.appendChild(card);
-      else gridProd.appendChild(card);
+      grid.appendChild(card);
     });
   } catch (e) {
     console.error(e);
-    document.getElementById('grid-graduadas').innerHTML = '<p>Erro ao carregar a planilha.</p>';
+    document.getElementById('grid').innerHTML = '<p>Erro ao carregar a planilha.</p>';
   }
 }
 
@@ -344,16 +290,7 @@ loadProducts();
 </script>
 
 <footer>
-  JutsuGeek • Pau dos Ferros - RN<br>
-  <a href="https://mypcards.com/JutsuGeek" target="_blank">Ver loja completa na MYP Cards</a>
-  <div class="social">
-    <a href="https://www.instagram.com/jutsu_geek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="IG"> Instagram</a>
-    <a href="https://www.facebook.com/JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" alt="FB"> Facebook</a>
-    <a href="https://www.youtube.com/@JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" alt="YT"> YouTube</a>
-    <a href="https://x.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" alt="X"> X</a>
-    <a href="http://wa.me/5584988229883" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WA"> WhatsApp</a>
-    <a href="https://www.pinterest.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/pinterest.svg" alt="Pin"> Pinterest</a>
-  </div>
+  JutsuGeek • Pau dos Ferros - RN
 </footer>
 </body>
 </html>

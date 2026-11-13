@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JutsuGeek • Cartas Graduadas & Produtos</title>
+<title>Indisponível | JutsuGeek</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -12,13 +12,6 @@
     --text: #f3f4f6;
     --muted: #9ca3af;
     --yellow: #facc15;
-    --cyan: #00bcd4;
-    --orange: #f97316;
-    --accent: #facc15;
-    --accent-hover: #eab308;
-    --border: #1f2937;
-    --price: #4ade80;
-    --promo: #f97316;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -39,9 +32,6 @@
     background: #111827;
     border-bottom: 1px solid rgba(250, 204, 21, 0.25);
     padding: 1rem 1.5rem;
-    position: sticky;
-    top: 0;
-    z-index: 50;
   }
   .header-inner {
     max-width: 1200px;
@@ -62,7 +52,6 @@
     font-weight: 500;
     font-size: 0.95rem;
   }
-  nav a:hover { color: #facc15; }
   .social-top {
     background: #111827;
     padding: 0.75rem 1.5rem;
@@ -100,17 +89,16 @@
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
   }
-  .section {
-    margin-bottom: 3rem;
+  .intro {
+    background: #111827;
+    border: 1px solid rgba(250, 204, 21, 0.25);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
   }
-  .section h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(250, 204, 21, 0.3);
-    color: white;
-  }
+  .intro h1 { font-size: 1.5rem; margin-bottom: 0.5rem; color: white; }
+  .intro p { color: #d1d5db; font-size: 0.95rem; }
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -141,79 +129,26 @@
     max-height: 100%;
     object-fit: contain;
   }
-  .product-body {
-    padding: 1rem 1.1rem 1.25rem;
-  }
-  .product h3 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: white;
-  }
-  .meta {
-    color: var(--muted);
-    font-size: 0.8rem;
-    margin-bottom: 0.6rem;
-  }
-  .price {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #4ade80;
-    margin-bottom: 0.75rem;
-  }
-  .btn {
-    display: block;
-    text-align: center;
-    background: #facc15;
-    color: #030712;
-    text-decoration: none;
-    padding: 0.6rem;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    transition: background 0.15s;
-  }
-  .btn:hover { background: #eab308; }
-  .badge {
+  .product-body { padding: 1rem 1.1rem 1.25rem; }
+  .product h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; color: white; }
+  .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 0.6rem; }
+  .status {
     display: inline-block;
-    background: rgba(249, 115, 22, 0.15);
-    color: #fb923c;
-    font-size: 0.65rem;
+    background: rgba(250, 204, 21, 0.15);
+    color: #facc15;
+    font-size: 0.7rem;
     font-weight: 600;
-    padding: 0.15rem 0.45rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    margin-bottom: 0.4rem;
-    border: 1px solid rgba(249, 115, 22, 0.3);
+    border: 1px solid rgba(250, 204, 21, 0.3);
   }
   footer {
     background: #111827;
     color: #9ca3af;
     text-align: center;
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.5rem;
     font-size: 0.85rem;
     border-top: 2px solid rgba(250, 204, 21, 0.4);
-  }
-  .social {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-  }
-  .social a {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #facc15;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-  .social a:hover { color: white; }
-  .social img {
-    height: 20px;
-    width: 20px;
-    filter: invert(1) brightness(0) saturate(100%) invert(78%) sepia(65%) saturate(500%) hue-rotate(5deg);
   }
 </style>
 </head>
@@ -224,19 +159,19 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo"><img src="logo.png" alt="JutsuGeek"></div>
+    <div class="logo"><a href="/"><img src="/logo.png" alt="JutsuGeek"></a></div>
     <nav>
       <a href="/">Início</a>
       <a href="/sobre.html">Sobre Nós</a>
-      <a href="#graduadas">Cartas Graduadas</a>
-      <a href="#produtos">Produtos</a>
+      <a href="/#graduadas">Cartas Graduadas</a>
+      <a href="/#produtos">Produtos</a>
       <a href="https://mypcards.com/JutsuGeek" target="_blank">Loja Completa</a>
     </nav>
   </div>
 </header>
 
 <div class="banner">
-  <img src="banner.png" alt="JutsuGeek Banner">
+  <img src="/banner.png" alt="JutsuGeek Banner">
 </div>
 
 <div class="social-top">
@@ -249,28 +184,27 @@
 </div>
 
 <div class="container">
-  <section class="section" id="graduadas">
-    <h2>Cartas Graduadas</h2>
-    <div class="grid" id="grid-graduadas"></div>
-  </section>
+  <div class="intro">
+    <h1>⚡ Itens Indisponíveis</h1>
+    <p>Relação de produtos em guarda para valorização futura. Não estão à venda no momento.<br>Uso para registro e apresentação de interesse.</p>
+  </div>
 
-  <section class="section" id="produtos">
-    <h2>Produtos</h2>
-    <div class="grid" id="grid-produtos"></div>
-  </section>
+  <div class="grid" id="grid"></div>
 </div>
 
-<script>
-// Substitua esta URL pela URL de publicação da sua planilha Google Sheets (CSV)
-// URL da planilha (formato JSON da Google Visualization API - mais estável)
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8b-QvuBfx53su8LQsbAnocJW4CDnViiheY89jwf4TsPwnzPfUgpiRzn6UG-FCV1SrlMfVByRT8wm3/pub?gid=834701060&single=true&output=csv';
+<footer>
+  JutsuGeek • Página privada de registro
+</footer>
 
-async function loadProducts() {
+<script>
+// Substitua pela URL de publicação CSV da sua planilha de itens indisponíveis
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8ZjmAWzATfEandowq0zV0kKFcfgFhTZY-7YAGtehKUwSsCWC2_2rau3XCo3o7yHrNMBU86Hu4FPds/pub?output=csv';
+
+async function loadItems() {
   try {
     const res = await fetch(SHEET_CSV_URL);
     const text = await res.text();
 
-    // Parser que trata corretamente campos com vírgulas (quando estão entre aspas)
     function parseCSV(csv) {
       const rows = [];
       let row = [];
@@ -300,60 +234,45 @@ async function loadProducts() {
     }
 
     const allRows = parseCSV(text);
-    const products = allRows.slice(1).map(cols => ({
+    const items = allRows.slice(1).map(cols => ({
       name: cols[0] || '',
       category: cols[1] || '',
-      price: cols[2] || '',
-      meta: cols[3] || '',
-      image: cols[4] || '',
-      link: cols[5] || '',
-      badge: cols[6] || ''
-    })).filter(p => p.name && p.image);
+      meta: cols[2] || '',
+      image: cols[3] || '',
+      notes: cols[4] || ''
+    })).filter(p => p.name);
 
-    const gridGrad = document.getElementById('grid-graduadas');
-    const gridProd = document.getElementById('grid-produtos');
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
 
-    gridGrad.innerHTML = '';
-    gridProd.innerHTML = '';
+    if (items.length === 0) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#9ca3af;">Nenhum item cadastrado ainda.</p>';
+      return;
+    }
 
-    products.forEach(p => {
+    items.forEach(p => {
       const card = document.createElement('div');
       card.className = 'product';
       card.innerHTML = `
         <div class="product-img">
-          <img src="${p.image}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div style=\\'padding:2rem;color:#666\\'>Sem imagem</div>'">
+          ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div style=\\'padding:2rem;color:#666;font-size:0.8rem\\'>Sem imagem</div>'">` : '<div style="padding:2rem;color:#666;font-size:0.8rem">Sem imagem</div>'}
         </div>
         <div class="product-body">
-          ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+          <span class="status">Indisponível</span>
           <h3>${p.name}</h3>
           ${p.meta ? `<div class="meta">${p.meta}</div>` : ''}
-          <div class="price">${p.price ? 'R$ ' + p.price : 'Ver preço'}</div>
-          <a class="btn" href="${p.link}" target="_blank">Ver na MYP</a>
+          ${p.notes ? `<div class="meta">${p.notes}</div>` : ''}
         </div>
       `;
-      if (p.category.toLowerCase().includes('gradu')) gridGrad.appendChild(card);
-      else gridProd.appendChild(card);
+      grid.appendChild(card);
     });
   } catch (e) {
     console.error(e);
-    document.getElementById('grid-graduadas').innerHTML = '<p>Erro ao carregar a planilha.</p>';
+    document.getElementById('grid').innerHTML = '<p style="grid-column:1/-1;text-align:center;">Erro ao carregar a planilha.</p>';
   }
 }
 
-loadProducts();
+loadItems();
 </script>
-
-<footer>
-  JutsuGeek • Pau dos Ferros - RN<br>
-  <a href="https://mypcards.com/JutsuGeek" target="_blank">Ver loja completa na MYP Cards</a>
-  <div class="social">
-    <a href="https://www.instagram.com/jutsu_geek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="IG"> Instagram</a>
-    <a href="https://www.facebook.com/JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" alt="FB"> Facebook</a>
-    <a href="https://www.youtube.com/@JutsuGeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" alt="YT"> YouTube</a>
-    <a href="https://x.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" alt="X"> X</a>
-    <a href="http://wa.me/5584988229883" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WA"> WhatsApp</a>
-    <a href="https://www.pinterest.com/jutsugeek" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/pinterest.svg" alt="Pin"> Pinterest</a>
-  </div>
-</footer>
 </body>
 </html>
